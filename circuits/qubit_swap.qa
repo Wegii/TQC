@@ -1,0 +1,25 @@
+.text
+	# Implementation of a crossing of qubits.
+
+    # DESCRIPTION_BEGIN
+	# 0: ----------------@----------------@--------@--------@---T
+    #                    |                |        │        │    
+    # 1: -------@--------|-------@--------|---Td---X---Td---X---S
+    #           │        |       │        |                      
+    # 2: ---H---X---Td---x---T---X---Td---x---T------------------
+    # DESCRIPTION_END
+
+    _init
+
+    _init:
+		# SWAP(target: 1,2)
+		waveguide_crossing (2,1) (2,1)
+		waveguide_crossing (1,0) (1,0)
+		waveguide_crossing (3,2) (3,2)
+		waveguide_crossing (2,1) (2,1)
+
+
+    _exit
+    
+    _exit:
+        ret

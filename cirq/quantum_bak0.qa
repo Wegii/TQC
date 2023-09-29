@@ -1,0 +1,71 @@
+.text
+    # Create a random quantum circuit using the Hadamard, CNOT, and Pauli-X
+    # gate.
+    # The circuit looks as follows:
+    #     0: ---H---X---X-----------X---H---
+    #                   |           |
+    #     1: ---H-------@---@---@---@---H---
+    #                       │       │
+    #     2: ---H---X-------X---X---X---H---
+    #
+    # Note: The circuit is probably not phase stable, as no phase shifters are
+    #       present.
+
+    _init
+
+    _init:
+        directional_coupler (1,0) (1,0) 50:50
+        directional_coupler (3,2) (3,2) 50:50
+        directional_coupler (5,4) (5,4) 50:50
+
+        % generic programmable part
+        % discrete and cont. 
+
+        % phase_shift
+
+	_cnot (1,2,3,4) (1,2,3,4)
+
+        qubit_swap (3,2,1,0) (3,2,1,0)
+        waveguide_crossing (5,4) (5,4)
+    
+        directional_coupler (1,0) (1,0) 50:50
+        directional_coupler (~,3) (~,3) 50:50
+        directional_coupler (2,1) (2,1) 50:50
+        directional_coupler (0,~) (0,~) 50:50
+        directional_coupler (1,0) (1,0) 50:50
+    
+        directional_coupler (5,4) (5,4) 50:50
+        directional_coupler (~,3) (~,3) 50:50
+        directional_coupler (2,1) (2,1) 50:50
+        directional_coupler (4,~) (4,~) 50:50
+        directional_coupler (5,4) (5,4) 50:50
+        
+        directional_coupler (5,4) (5,4) 50:50
+        directional_coupler (~,3) (~,3) 50:50
+        directional_coupler (2,1) (2,1) 50:50
+        directional_coupler (4,~) (4,~) 50:50
+        directional_coupler (5,4) (5,4) 50:50
+        
+        directional_coupler (1,0) (1,0) 50:50
+        directional_coupler (~,3) (~,3) 50:50
+        directional_coupler (2,1) (2,1) 50:50
+        directional_coupler (0,~) (0,~) 50:50
+        directional_coupler (1,0) (1,0) 50:50
+        
+        waveguide_crossing (5,4) (5,4)
+
+        directional_coupler (1,0) (1,0) 50:50
+        directional_coupler (3,2) (3,2) 50:50
+        directional_coupler (5,4) (5,4) 50:50
+        _exit
+    
+    _exit:
+        ret
+
+    _cnot (@in)(@out):
+        directional_coupler (1,0) (1,0) 50:50
+        directional_coupler (~,3) (~,3) 67:33
+        directional_coupler (2,1) (2,1) 67:33
+        directional_coupler (0,~) (0,~) 67:33
+        directional_coupler (1,0) (1,0) 50:50
+

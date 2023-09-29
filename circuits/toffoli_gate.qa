@@ -1,0 +1,115 @@
+.text
+	# Implementation of the Toffoli gate using Hadamard, phase, controlled-NOT
+	# and pi/8 gates.
+
+    # DESCRIPTION_BEGIN
+	# 0: ----------------@----------------@--------@--------@---T
+    #                    |                |        │        │    
+    # 1: -------@--------|-------@--------|---Td---X---Td---X---S
+    #           │        |       │        |                      
+    # 2: ---H---X---Td---x---T---X---Td---x---T------------------
+    # DESCRIPTION_END
+
+    _init
+
+    _init:
+    	# H(target: 3)
+        directional_coupler (5,4) (5,4) 50:50
+
+        # CNOT(control:2, target:3)
+        directional_coupler (3,2) (3,2) 50:50
+		directional_coupler (~,5) (~,5) 67:33
+		directional_coupler (4,3) (4,3) 67:33
+		directional_coupler (2,~) (2,~) 67:33
+		directional_coupler (3,2) (3,2) 50:50
+
+		# R_{-pi/4}(target: 3)
+		phase (5,4) (5,4) -pi/4
+
+		# SWAP(target: 1,2)
+		waveguide_crossing (2,1) (2,1)
+		waveguide_crossing (1,0) (1,0)
+		waveguide_crossing (3,2) (3,2)
+		waveguide_crossing (2,1) (2,1)
+
+		# CNOT(control:1, target:3)
+        directional_coupler (3,2) (3,2) 50:50
+		directional_coupler (~,5) (~,5) 67:33
+		directional_coupler (4,3) (4,3) 67:33
+		directional_coupler (2,~) (2,~) 67:33
+		directional_coupler (3,2) (3,2) 50:50
+
+		# SWAP(target: 1,2)
+		waveguide_crossing (2,1) (2,1)
+		waveguide_crossing (1,0) (1,0)
+		waveguide_crossing (3,2) (3,2)
+		waveguide_crossing (2,1) (2,1)
+
+		# R_{pi/4}(target: 3)
+		phase (5,4) (5,4) pi/4
+
+        # CNOT(control:2, target:3)
+        directional_coupler (3,2) (3,2) 50:50
+		directional_coupler (~,5) (~,5) 67:33
+		directional_coupler (4,3) (4,3) 67:33
+		directional_coupler (2,~) (2,~) 67:33
+		directional_coupler (3,2) (3,2) 50:50
+
+		# R_{-pi/4}(target: 3)
+		phase (5,4) (5,4) -pi/4
+
+		# SWAP(target: 1,2)
+		waveguide_crossing (2,1) (2,1)
+		waveguide_crossing (1,0) (1,0)
+		waveguide_crossing (3,2) (3,2)
+		waveguide_crossing (2,1) (2,1)
+
+		# CNOT(control:1, target:3)
+        directional_coupler (3,2) (3,2) 50:50
+		directional_coupler (~,5) (~,5) 67:33
+		directional_coupler (4,3) (4,3) 67:33
+		directional_coupler (2,~) (2,~) 67:33
+		directional_coupler (3,2) (3,2) 50:50
+
+		# SWAP(target: 1,2)
+		waveguide_crossing (2,1) (2,1)
+		waveguide_crossing (1,0) (1,0)
+		waveguide_crossing (3,2) (3,2)
+		waveguide_crossing (2,1) (2,1)
+
+		# R_{-pi/4}(target: 2)
+		phase (3,2) (3,2) -pi/4
+
+		# R_{pi/4}(target: 3)
+		phase (5,4) (5,4) pi/4
+
+		# CNOT(control:1, target:2)
+		directional_coupler (1,0) (1,0) 50:50
+		directional_coupler (~,3) (~,3) 67:33
+		directional_coupler (2,1) (2,1) 67:33
+		directional_coupler (0,~) (0,~) 67:33
+		directional_coupler (1,0) (1,0) 50:50
+
+    	# H(target: 3)
+        directional_coupler (5,4) (5,4) 50:50
+
+		# R_{-pi/4}(target: 2)
+		phase (3,2) (3,2) -pi/4
+
+		# CNOT(control:1, target:2)
+		directional_coupler (1,0) (1,0) 50:50
+		directional_coupler (~,3) (~,3) 67:33
+		directional_coupler (2,1) (2,1) 67:33
+		directional_coupler (0,~) (0,~) 67:33
+		directional_coupler (1,0) (1,0) 50:50
+
+		# R_{pi/4}(target: 1)
+		phase (1,0) (1,0) pi/4
+
+		# R_{pi/2}(target: 2)
+		phase (3,2) (3,2) pi/2
+
+        _exit
+    
+    _exit:
+        ret

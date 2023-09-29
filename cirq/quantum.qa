@@ -1,0 +1,44 @@
+.text
+    _init
+
+    _init:
+        directional_standard (1,0) (1,0) 5 20
+        directional_standard (3,2) (3,2) 5 20 0.4 15
+        directional_standard (5,4) (5,4) 5 20 0.4 15
+
+        waveguide_crossing (1,0) (1,0) default
+        waveguide_crossing (5,4) (5,4) default
+    
+        directional_standard (1,0) (1,0) 5 20 0.4 15
+        directional_standard (~,3) (~,3) 5 20 0.4 15
+        directional_standard (2,1) (2,1) 5 20 0.4 15
+        directional_standard (0,~) (0,~) 5 20 0.4 15
+        directional_standard (1,0) (1,0) 5 20 0.4 15
+    
+        directional_standard (5,4) (5,4) 5 20 0.4 15
+        directional_standard (~,3) (~,3) 5 20 0.4 15
+        directional_standard (2,1) (2,1) 5 20 0.4 15
+        directional_standard (4,~) (4,~) 5 20 0.4 15
+        directional_standard (5,4) (5,4) 5 20 0.4 15
+        
+        directional_standard (5,4) (5,4) 5 20 0.4 15
+        directional_standard (~,3) (~,3) 5 20 0.4 15
+        directional_standard (2,1) (2,1) 5 20 0.4 15
+        directional_standard (4,~) (4,~) 5 20 0.4 15
+        directional_standard (5,4) (5,4) 5 20 0.4 15
+        
+        directional_standard (1,0) (1,0) 5 20 0.4 15
+        directional_standard (~,3) (~,3) 5 20 0.4 15
+        directional_standard (2,1) (2,1) 5 20 0.4 15
+        directional_standard (0,~) (0,~) 5 20 0.4 15
+        directional_standard (1,0) (1,0) 5 20 0.4 15
+        
+        waveguide_crossing (5,4) (5,4) default
+
+        directional_standard (1,0) (1,0) default
+        directional_standard (3,2) (3,2) default
+        directional_standard (5,4) (5,4) default
+        _exit
+    
+    _exit:
+        ret

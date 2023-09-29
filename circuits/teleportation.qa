@@ -1,0 +1,38 @@
+.text
+    # DESCRIPTION_BEGIN
+	# 0: -----------@---H---
+    #               │
+    # 1: ---H---@---X-------
+    #           │   
+    # 2: -------X-----------
+    # DESCRIPTION_END
+
+    _init
+
+    _init:
+        # Hadamard (target: q1)
+        directional_coupler (3,2) (3,2) 50:50
+        directional_coupler (1,0) (1,0) 50:50
+        directional_coupler (5,4) (5,4) 50:50
+
+		# CNOT (target: q1, q2)
+        directional_coupler (3,2) (3,2) 50:50
+        directional_coupler (-1,5) (-1,5) 67:33
+        directional_coupler (4,3) (4,3) 67:33
+        directional_coupler (2,~) (2,~) 67:33
+        directional_coupler (3,2) (3,2) 50:50
+
+        # CNOT (target: q0, q1)
+        directional_coupler (1,0) (1,0) 50:50
+        directional_coupler (-2,3) (-2,3) 67:33
+        #directional_coupler (2,1) (2,1) 67:33
+        directional_coupler (0,~) (0,~) 67:33
+        directional_coupler (1,0) (1,0) 50:50
+
+        # Hadamard (target: q0)
+        directional_coupler (5,4) (5,4) 50:50
+
+    _exit
+    
+    _exit:
+        ret
